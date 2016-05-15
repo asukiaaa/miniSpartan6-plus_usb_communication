@@ -1,9 +1,9 @@
 # miniSpartan6-plus_usb_communication
-A project to communicate FPGA board and PC via USB.
+A project to communicate a FPGA board (miniSpartan6+) and a PC via USB in 12Mbit/s. One byte takes 10 bits (a start bit, 8 data bit and a stop bit), so It may goes 1.2MByte/s.
 
 # Programs
 ## ISE
-It waits serial communication in 12Mbit/s (1.5MByte/s).
+This FPGA program waits signal from serial port. If it received some data, it returns same data.
 
 ```sh
 # After you create bit file by ISE
@@ -25,7 +25,7 @@ You can send signal to Spartan6 with using libusb. Send only now.
 ```sh
 cd ./cpp
 make
-sudo serial_communication
+sudo ./serial_communication
 ```
 Original: http://www.dreamincode.net/forums/topic/148707-introduction-to-using-libusb-10/
 
