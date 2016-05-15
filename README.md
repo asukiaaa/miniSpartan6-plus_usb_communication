@@ -1,9 +1,9 @@
 # miniSpartan6-plus_usb_communication
-A project to communicate FPGA board and PC via USB.
+A project to communicate a FPGA board (miniSpartan6+) and a PC via USB in 12Mbit/s (1.5MByte/s).
 
 # Programs
 ## ISE
-It waits serial communication in 12Mbit/s (1.5MByte/s).
+This FPGA program waits signal from serial port. If it received some data, it returns same data.
 
 ```sh
 # After you create bit file by ISE
