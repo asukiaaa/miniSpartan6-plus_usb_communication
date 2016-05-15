@@ -13,7 +13,7 @@ import time
 # serial_speed = 1500000  # 1.5Mbit/s
 serial_speed = 12000000 # 12Mbit/s
 
-# One byte takes 10 bits so 12Mbit/s may almost equal 1.2MByte/s.
+# One byte takes 12 bits so 12Mbit/s may almost equal 1.0MByte/s.
 
 spartan_ser = serial.Serial('/dev/ttyUSB1', serial_speed)
 
