@@ -1,5 +1,5 @@
 # miniSpartan6-plus_usb_communication
-A project to communicate a FPGA board (miniSpartan6+) and a PC via USB in 12Mbit/s. One byte takes 10 bits (a start bit, 8 data bit and a stop bit), so It may goes 1.2MByte/ s.
+A project to communicate a FPGA board (miniSpartan6+) and a PC via USB in 12Mbit/s. One byte takes 10 bits (a start bit, 8 data bit and a stop bit), so It may goes 1.2MByte/s.
 
 # Programs
 ## ISE
