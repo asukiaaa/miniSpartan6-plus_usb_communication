@@ -1,21 +1,21 @@
 import serial
 import time
 
-# serial_speed = 921600
-# serial_speed = 115200
-# serial_speed = 1843200
-# serial_speed = 3686400
-# serial_speed = 7372800
-# serial_speed = 14745600
-# serial_speed = 29491200
-# serial_speed = 25000000
+# baudrate = 921600
+# baudrate = 115200
+# baudrate = 1843200
+# baudrate = 3686400
+# baudrate = 7372800
+# baudrate = 14745600
+# baudrate = 29491200
+# baudrate = 25000000
 
-# serial_speed = 1500000  # 1.5Mbit/s
-serial_speed = 12000000 # 12Mbit/s
+# baudrate = 1500000  # 1.5Mbit/s
+baudrate = 12000000 # 12Mbit/s
 
 # One byte takes 12 bits so 12Mbit/s may almost equal 1.0MByte/s.
 
-spartan_ser = serial.Serial('/dev/ttyUSB1', serial_speed)
+spartan_ser = serial.Serial('/dev/ttyUSB1', baudrate)
 
 time.sleep(1)
 

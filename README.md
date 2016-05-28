@@ -20,14 +20,29 @@ python ./python/serial_communication.py
 ```
 
 ## CPP
-You can send signal to Spartan6 with using libusb. Send only now.
+You can communicate with Spartan6 with using libftdi or ioctl.
 
 ```sh
 cd ./cpp
 make
-sudo ./serial_communication
+sudo ./bin/serial_with_libftdi
 ```
-Original: http://www.dreamincode.net/forums/topic/148707-introduction-to-using-libusb-10/
+
+```sh
+cd ./cpp
+make
+sudo ./bin/serial_with_ioctl
+```
+
+I also wrote program with using libusb but it does not run correctry only that.
+Libusb can't set baudrate so the program needs to run other program to set baudrate.
+
+```sh
+cd ./cpp
+make
+sudo ./bin/serial_with_ioctl # run to set baudrate
+sudo ./bin/serial_with_libusb
+```
 
 # License
 MIT

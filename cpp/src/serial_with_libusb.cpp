@@ -1,11 +1,29 @@
 //
 // A program for serial communication via USB
-// references:
-//   http://www.dreamincode.net/forums/topic/148707-introduction-to-using-libusb-10/
-//   http://libusb.sourceforge.net/api-1.0/group__syncio.html
 //
+// Written by Asuki Kono (https://github.com/asukiaaa)
+//
+// License: MIT
+//
+// references:
+// http://www.dreamincode.net/forums/topic/148707-introduction-to-using-libusb-10/
+// http://libusb.sourceforge.net/api-1.0/group__syncio.html
+//
+
+//
+// Issues of this program
+//
+// - How to set 12Mbit/s with libusb
+// We need to set boardrate of a target device as 12Mbit/s before running this program.
+//
+// - Closing target device incorrectry
+// After running this program /dev/ttyUSB0 port is gone.
+//
+
 #include <iostream>
+#include <iomanip>
 #include <libusb-1.0/libusb.h>
+#include <unistd.h>
 
 //
 // FTDI lsusb info
@@ -30,8 +48,9 @@
 //
 // Spartan6 is connected to port-B, so selected second interface.
 //
-#define TARGET_INTERFACE_NUM 1
-#define TARGET_ENDPOINT_ADDRESS 4
+#define TARGET_INTERFACE_NUM 1 // 1 means second one
+#define TARGET_ENDPOINT_SEND_ADDRESS 4
+#define TARGET_ENDPOINT_RECEIVE_ADDRESS 131
 
 using namespace std;
 
@@ -107,22 +126,52 @@ int main() {
   // used to find out how many bytes were written
   int actual;
   // data to write
-  unsigned char *data = new unsigned char[4];
-  // some dummy values
-  data[0]='a';data[1]='b';data[2]='c';data[3]='a';
+  unsigned char data[1];
+
+  int received_length = 0;
+  unsigned char received_data[255];
 
   // just to see the data we want to write : abcd
-  cout<<"Data->"<<data<<"<-"<<endl;
-  cout<<"Writing Data..."<<endl;
+  const char* command_chars = "abcd";
 
-  // transfer data for target end point
-  r = libusb_bulk_transfer(dev_handle, (TARGET_ENDPOINT_ADDRESS | LIBUSB_ENDPOINT_OUT), data, 4, &actual, 100);
+  for ( int i=0; i<4; i++ ) {
+    data[0] = command_chars[i];
 
-  // we wrote the 4 bytes successfully
-  if(r == 0 && actual == 4)
-    cout<<"Writing Successful!"<<endl;
-  else
-    cout<<"Write Error"<<endl;
+    // send data for target end point
+    r = libusb_bulk_transfer(dev_handle,
+                             TARGET_ENDPOINT_SEND_ADDRESS,
+                             data,
+                             1,
+                             &actual,
+                             100);
+
+    if(r == 0 && actual == 1)
+      cout<<"Send: "<< data[0] << endl;
+    else
+    cout<<"Send Error"<<endl;
+
+    // receive data from target end point
+    r = libusb_bulk_transfer(dev_handle,
+                             TARGET_ENDPOINT_RECEIVE_ADDRESS,
+                             received_data,
+                             254,
+                             &received_length,
+                             100);
+
+    if ( r == 0 && received_length > 0 ) {
+      received_data[received_length] = 0;
+      cout << "Received: " << (unsigned char*)received_data << endl;
+      // cout << "Received:" << endl;
+      // for ( int i=0; i<received_length; i++ ) {
+      //   cout << (int)received_data[i] << ": " << (unsigned char)received_data[i] << endl;
+      // }
+    } else {
+      cout<<"Receive Error"<<endl;
+    }
+
+    sleep(1);
+  }
+
 
   // release the claimed interface
   r = libusb_release_interface(dev_handle, TARGET_INTERFACE_NUM);
@@ -134,11 +183,9 @@ int main() {
 
   // close the device we opened
   libusb_close(dev_handle);
-  // needs to be called to end the
+  // needs to be called to end the session
   libusb_exit(ctx);
 
-  // delete the allocated memory for data
-  delete[] data;
   return 0;
 }
 
