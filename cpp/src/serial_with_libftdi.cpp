@@ -8,7 +8,6 @@
 // references:
 // http://penguin.tantin.jp/hard/libFTDI.html
 // https://www.intra2net.com/en/developer/libftdi/documentation/
-// https://chromium.googlesource.com/chromiumos/third_party/libftdi/+/8ace18625ea423f7a06b2927bf5d0fbd520146ae/examples/bitbang_ft2232.c
 // https://github.com/legege/libftdi/blob/master/test/baudrate.cpp
 // https://github.com/legege/libftdi/blob/master/src/ftdi.h
 //
@@ -19,21 +18,14 @@
 // simillar issue: http://blog.gmane.org/gmane.comp.hardware.libftdi.general/month=20110601
 //
 #include <libftdi1/ftdi.h>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include <iostream>
-#include <sys/ioctl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 
 #define TARGET_BAUDRATE   12000000 // 12Mbit/s
 #define TARGET_VENDOR_ID  1027
 #define TARGET_PRODUCT_ID 24592
 #define TARGET_INTERFACE  INTERFACE_B
-
-using namespace std;
 
 int main(void) {
   struct ftdi_context* ftdic;
@@ -60,8 +52,6 @@ int main(void) {
 
   printf("type: %d\n", ftdic->type);
   printf("TYPE_2232H: %d\n", TYPE_2232H);
-
-  printf("baudrate: %d\n", ftdic->baudrate);
 
   // To set boardrate as 12Mbit/s,
   // libftdi version (maybe) 1 or more is needed
