@@ -17,7 +17,7 @@
 // We need to set boardrate of a target device as 12Mbit/s before running this program.
 //
 // - Closing target device incorrectry
-// After running this program /dev/ttyUSB0 port is gone.
+// After running this program /dev/ttyUSB0 port is disabled.
 //
 
 #include <iostream>

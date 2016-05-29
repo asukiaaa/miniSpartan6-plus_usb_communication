@@ -14,9 +14,11 @@
 
 //
 // Issue of this program
-// Kerner driver is detouched after running this program.
+//
+// - Kerner driver(/dev/ttyUSB1) is detouched after running this program.
 // simillar issue: http://blog.gmane.org/gmane.comp.hardware.libftdi.general/month=20110601
 //
+
 #include <libftdi1/ftdi.h>
 #include <stdio.h>
 #include <stdlib.h>
