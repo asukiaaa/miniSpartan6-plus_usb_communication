@@ -22,11 +22,19 @@ python ./python/serial_communication.py
 ## CPP
 You can communicate with Spartan6 with using libftdi or ioctl.
 
+### libftdi
+
+libftdi ver1 or more is needed. Ubuntu apg-get supports ver 0.2 so installing latest libftdi from source is needed.
+
+https://www.intra2net.com/en/developer/libftdi/download.php
+
 ```sh
 cd ./cpp
 make
 sudo ./bin/serial_with_libftdi
 ```
+
+### ioctl
 
 ```sh
 cd ./cpp
@@ -34,8 +42,10 @@ make
 sudo ./bin/serial_with_ioctl
 ```
 
+### libusb
+
 I also wrote program with using libusb but it does not run correctry only that.
-Libusb can't set baudrate so the program needs to run other program to set baudrate.
+Libusb can't set baudrate so this program needs to run another program to set baudrate.
 
 ```sh
 cd ./cpp
