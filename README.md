@@ -58,5 +58,6 @@ sudo ./bin/serial_with_libusb
 MIT
 
 # References
-https://www.scarabhardware.com/forums/topic/connecting-usb-ft2232-to-an-microblaze-uart/
-https://www.scarabhardware.com/forums/topic/how-to-reach-close-to-480mbps-over-usb/
+- [ubuntuでlibftdiを使って12Mbit/sのシリアル通信をする方法](http://asukiaaa.blogspot.jp/2016/05/ubuntulibftdi12mbits.html)
+- [Connecting USB FT2232 to an Microblaze UART](https://www.scarabhardware.com/forums/topic/connecting-usb-ft2232-to-an-microblaze-uart/)
+- [How to reach (close to?) 480Mbps over USB?](https://www.scarabhardware.com/forums/topic/how-to-reach-close-to-480mbps-over-usb/)
